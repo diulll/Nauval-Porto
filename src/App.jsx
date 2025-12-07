@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import BlurText from "./BlurText"
 import GooeyNav from './components/GooeyNav'
 import './App.css'
+const Halaman1 = '/Halaman1.png'
 
 function App() {
   const [showNavbar, setShowNavbar] = useState(false);
@@ -162,57 +163,50 @@ function App() {
           }
         }
       `}</style>
-      {/* Section Welcome */}
-      <div id="welcome" style={{ 
-        minHeight: '100vh', 
-        display: 'grid', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        padding: '20px', 
-        position: 'relative', 
-        overflow: 'hidden', 
+
+      {/* Section Welcome dengan Cursor Tracking */}
+      <WelcomeSection activeSection={activeSection} getAnimationStyle={getAnimationStyle} />
+      
+      {/* Rest of sections */}
+      <AppSections activeSection={activeSection} getAnimationStyle={getAnimationStyle} />
+    </>
+  )
+}
+
+function WelcomeSection({ activeSection, getAnimationStyle }) {
+  return (
+    <section 
+      id="welcome" 
+      className="relative w-full h-screen flex items-center justify-center overflow-hidden"
+      style={{
+        position: 'relative',
+        width: '100%',
+        minHeight: '100vh',
         backgroundColor: '#000',
         ...getAnimationStyle(0)
-      }}>
-        {/* Content */}
-        <div style={{ position: 'relative', zIndex: '1', textAlign: 'center' }}>
-          <BlurText
-            text="Nauval Badiul Fikri Alhadad Hs"
-            delay={300}
-            animateBy="words"
-            direction="top"
-            className="mb-8"
-            style={{ 
-              fontSize: 'clamp(32px, 8vw, 80px)',
-              fontWeight: 'bold',
-              textAlign: 'center',
-              width: '100%',
-              overflow: 'hidden',
-              wordBreak: 'break-word',
-              whiteSpace: 'normal',
-              color: '#fff'
-            }}
-          />
-          <BlurText
-            text="Portofolio"
-            delay={300}
-            animateBy="words"
-            direction="top"
-            className="mb-8"
-            style={{ 
-              fontSize: 'clamp(32px, 8vw, 80px)',
-              fontWeight: 'bold',
-              textAlign: 'center',
-              width: '100%',
-              overflow: 'hidden',
-              wordBreak: 'break-word',
-              whiteSpace: 'normal',
-              color: '#fff'
-            }}
-          />
-        </div>
-      </div>
+      }}
+    >
+      <img 
+        src={Halaman1} 
+        alt="background" 
+        style={{
+          position: 'absolute',
+          top: '0',
+          left: '0',
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center',
+          zIndex: '1'
+        }}
+      />
+    </section>
+  );
+}
 
+function AppSections({ activeSection, getAnimationStyle }) {
+  return (
+    <>
       {/* Section 2: Home */}
       <section id="home" style={{ 
         minHeight: '100vh', 
