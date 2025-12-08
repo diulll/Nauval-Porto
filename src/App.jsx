@@ -412,13 +412,14 @@ function AppSections({ activeSection, getAnimationStyle }) {
             }}>
               <LogoLoop
                 logos={[
+                  { node: <SiHtml5 style={{ fontSize: '48px', color: '#E34C26' }} />, title: "HTML5", href: "https://html.spec.whatwg.org" },
                   { node: <SiCss3 style={{ fontSize: '48px', color: '#1572B6' }} />, title: "CSS3", href: "https://www.w3.org/Style/CSS" },
                   { node: <SiJavascript style={{ fontSize: '48px', color: '#F7DF1E' }} />, title: "JavaScript", href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
                   { node: <SiReact style={{ fontSize: '48px', color: '#3498DB' }} />, title: "React", href: "https://react.dev" },
                   { node: <SiLaravel style={{ fontSize: '48px', color: '#FF2D20' }} />, title: "Laravel", href: "https://laravel.com" },
                   { node: <SiPhp style={{ fontSize: '48px', color: '#777BB4' }} />, title: "PHP", href: "https://www.php.net" },
                   { node: <SiTailwindcss style={{ fontSize: '48px', color: '#06B6D4' }} />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
-                  { node: <SiHtml5 style={{ fontSize: '48px', color: '#E34C26' }} />, title: "HTML5", href: "https://html.spec.whatwg.org" }
+                  { node: <div style={{ width: '48px', height: '48px', opacity: 0 }}></div>, title: "Spacer", href: "#" }
                 ]}
                 speed={120}
                 direction="left"
