@@ -1,19 +1,53 @@
 import { useState, useEffect, useRef } from 'react'
 import BlurText from "./BlurText"
 import GooeyNav from './components/GooeyNav'
+import LogoLoop from './components/LogoLoop'
+import { SiReact, SiTailwindcss, SiHtml5, SiCss3, SiJavascript, SiLaravel, SiPhp } from 'react-icons/si'
 import './App.css'
 const Halaman1 = '/Halaman1.png'
+import profileImage from './assets/profileweb.png'
+import project1Image from './assets/Project_1.png'
+import project2Image from './assets/Project_2.png'
+import project3Image from './assets/Project_3.png'
+import project4Image from './assets/Project_4.png'
+import project5Image from './assets/Project_5.png'
+import project6Image from './assets/Project_6.png'
 
+// Hook untuk menghitung angka dengan animasi
+function useCountUp(target, duration = 2000, shouldStart = false) {
+  const [count, setCount] = useState(0);
 
+  useEffect(() => {
+    if (!shouldStart) return;
+
+    let startTime = null;
+    const animate = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const progress = (currentTime - startTime) / duration;
+
+      if (progress < 1) {
+        setCount(Math.floor(progress * target));
+        requestAnimationFrame(animate);
+      } else {
+        setCount(target);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [shouldStart, target, duration]);
+
+  return count;
+}
+
+// Hook untuk IntersectionObserver animation
 function useInView(ref) {
   const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-        }
+        // Reset state berdasarkan visibility - animasi berjalan setiap kali elemen terlihat
+        setIsInView(entry.isIntersecting);
       },
       { threshold: 0.1 }
     );
@@ -39,6 +73,13 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      
+      // Navbar muncul setelah scroll melewati 80% dari tinggi viewport pertama
+      const shouldShow = scrollY > windowHeight * 0.8;
+      setShowNavbar(shouldShow);
+
       // Detect active section based on scroll position
       const sections = document.querySelectorAll('section');
       let currentSectionIndex = 0;
@@ -51,9 +92,6 @@ function App() {
         }
       });
 
-      // Navbar shows on all sections
-      const shouldShow = true;
-      setShowNavbar(shouldShow);
       setActiveSection(currentSectionIndex);
     };
 
@@ -330,6 +368,11 @@ function AppSections({ activeSection, getAnimationStyle }) {
   const projectsInView = useInView(projectsRef);
   const contactInView = useInView(contactRef);
 
+  // Count up animations
+  const projectsCount = useCountUp(120, 2000, aboutInView);
+  const satisfactionCount = useCountUp(95, 2000, aboutInView);
+  const yearsCount = useCountUp(1, 2000, aboutInView);
+
   const fadeInUp = (isInView) => ({
     opacity: isInView ? 1 : 0,
     transform: isInView ? 'translateY(0)' : 'translateY(40px)',
@@ -360,61 +403,50 @@ function AppSections({ activeSection, getAnimationStyle }) {
               <button style={{ padding: '12px 30px', backgroundColor: 'transparent', color: 'white', border: '1px solid white', borderRadius: '4px', cursor: 'pointer', fontSize: '16px' }}>My resume</button>
             </div>
             <div style={{ 
-              display: 'flex', 
-              gap: '30px', 
-              fontSize: 'clamp(14px, 3vw, 16px)', 
-              color: '#666',
-              overflowX: 'auto',
-              paddingBottom: '10px',
-              scrollBehavior: 'smooth',
-              scrollSnapType: 'x mandatory'
+              marginTop: '60px',
+              overflow: 'hidden',
+              paddingRight: '20px',
+              display: 'flex',
+              alignItems: 'center',
+              height: '80px'
             }}>
-              {[
-                { name: 'HTML', color: '#FF6B6B' },
-                { name: 'CSS', color: '#4ECDC4' },
-                { name: 'Javascript', color: '#F7DC6F' },
-                { name: 'Laravel', color: '#E74C3C' },
-                { name: 'React', color: '#3498DB' },
-                { name: 'Python', color: '#2ECC71' }
-              ].map((skill, idx) => (
-                <div key={idx} style={{ 
-                  position: 'relative', 
-                  paddingBottom: '8px',
-                  minWidth: 'max-content',
-                  scrollSnapAlign: 'start',
-                  whiteSpace: 'nowrap'
-                }}>
-                  <span style={{ display: 'block', color: '#fff' }}>{skill.name}</span>
-                  <div style={{ 
-                    position: 'absolute', 
-                    bottom: '0', 
-                    left: '0', 
-                    right: '0', 
-                    height: '2px',
-                    backgroundColor: skill.color,
-                    boxShadow: `0 0 10px ${skill.color}40`
-                  }}></div>
-                </div>
-              ))}
+              <LogoLoop
+                logos={[
+                  { node: <SiCss3 style={{ fontSize: '48px', color: '#1572B6' }} />, title: "CSS3", href: "https://www.w3.org/Style/CSS" },
+                  { node: <SiJavascript style={{ fontSize: '48px', color: '#F7DF1E' }} />, title: "JavaScript", href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+                  { node: <SiReact style={{ fontSize: '48px', color: '#3498DB' }} />, title: "React", href: "https://react.dev" },
+                  { node: <SiLaravel style={{ fontSize: '48px', color: '#FF2D20' }} />, title: "Laravel", href: "https://laravel.com" },
+                  { node: <SiPhp style={{ fontSize: '48px', color: '#777BB4' }} />, title: "PHP", href: "https://www.php.net" },
+                  { node: <SiTailwindcss style={{ fontSize: '48px', color: '#06B6D4' }} />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+                  { node: <SiHtml5 style={{ fontSize: '48px', color: '#E34C26' }} />, title: "HTML5", href: "https://html.spec.whatwg.org" }
+                ]}
+                speed={120}
+                direction="left"
+                logoHeight={48}
+                gap={80}
+                hoverSpeed={0}
+                scaleOnHover
+                fadeOut
+                fadeOutColor="#000000"
+                ariaLabel="Technology tools"
+              />
             </div>
           </div>
 
           {/* Right Content - Image placeholder */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{
-              width: 'clamp(200px, 100%, 400px)',
-              height: 'clamp(200px, 100%, 400px)',
-              backgroundColor: '#FF6B6B',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#fff',
-              fontSize: '18px'
-            }}>
-              {/* Ganti dengan img tag nanti */}
-              Image Placeholder
-            </div>
+            <img 
+              src={profileImage} 
+              alt="Profile" 
+              style={{
+                width: 'clamp(200px, 100%, 400px)',
+                height: 'clamp(200px, 100%, 400px)',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                objectPosition: 'center',
+                boxShadow: '0 8px 32px 0 rgba(255, 107, 107, 1)'
+              }}
+            />
           </div>
         </div>
       </section>
@@ -462,15 +494,15 @@ function AppSections({ activeSection, getAnimationStyle }) {
               </p>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '30px' }}>
                 <div>
-                  <h3 style={{ fontSize: '32px', fontWeight: 'bold', color: '#FF6B6B' }}>120 <span style={{ color: '#FF6B6B' }}>+</span></h3>
+                  <h3 style={{ fontSize: '32px', fontWeight: 'bold', color: '#FF6B6B' }}>{projectsCount} <span style={{ color: '#FF6B6B' }}>+</span></h3>
                   <p style={{ fontSize: '14px', color: '#666' }}>Completed Projects</p>
                 </div>
                 <div>
-                  <h3 style={{ fontSize: '32px', fontWeight: 'bold', color: '#FF6B6B' }}>95 <span style={{ color: '#FF6B6B' }}>%</span></h3>
+                  <h3 style={{ fontSize: '32px', fontWeight: 'bold', color: '#FF6B6B' }}>{satisfactionCount} <span style={{ color: '#FF6B6B' }}>%</span></h3>
                   <p style={{ fontSize: '14px', color: '#666' }}>Client satisfaction</p>
                 </div>
                 <div>
-                  <h3 style={{ fontSize: '32px', fontWeight: 'bold', color: '#FF6B6B' }}>1 <span style={{ color: '#FF6B6B' }}>+</span></h3>
+                  <h3 style={{ fontSize: '32px', fontWeight: 'bold', color: '#FF6B6B' }}>{yearsCount} <span style={{ color: '#FF6B6B' }}>+</span></h3>
                   <p style={{ fontSize: '14px', color: '#666' }}>Years of experience</p>
                 </div>
               </div>
@@ -493,33 +525,57 @@ function AppSections({ activeSection, getAnimationStyle }) {
         <div style={{ maxWidth: '1200px', width: '100%', ...fadeInUp(projectsInView) }}>
           <h2 style={{ fontSize: 'clamp(32px, 6vw, 48px)', fontWeight: 'bold', marginBottom: '60px', textAlign: 'center' }}>Projects</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}>
-            {[1, 2, 3, 4, 5, 6].map((project) => (
-              <div key={project} style={{
-                backgroundColor: '#1a1a1a',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                cursor: 'pointer',
-                transition: 'transform 0.3s',
-                minHeight: '300px'
-              }}>
-                <div style={{
-                  width: '100%',
-                  height: '200px',
-                  backgroundColor: '#2a2a2a',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#666',
-                  fontSize: '14px'
+            {[1, 2, 3, 4, 5, 6].map((project) => {
+              const cardRef = useRef(null);
+              const cardInView = useInView(cardRef);
+              
+              return (
+                <div key={project} ref={cardRef} style={{
+                  backgroundColor: '#1a1a1a',
+                  borderRadius: '8px',
+                  overflow: 'hidden',
+                  cursor: 'pointer',
+                  transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  minHeight: '300px',
+                  transform: cardInView ? 'translateY(0) scale(1)' : 'translateY(40px) scale(0.95)',
+                  opacity: cardInView ? 1 : 0,
+                  boxShadow: cardInView ? '0 20px 40px rgba(255, 107, 107, 0.2)' : '0 10px 20px rgba(255, 107, 107, 0.1)'
                 }}>
-                  Project {project} Image
+                  <div style={{
+                    width: '100%',
+                    height: '200px',
+                    backgroundColor: '#2a2a2a',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#666',
+                    fontSize: '14px',
+                    transition: 'all 0.6s ease',
+                    overflow: 'hidden'
+                  }}>
+                    {project === 1 ? (
+                      <img src={project1Image} alt="Project 1" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : project === 2 ? (
+                      <img src={project2Image} alt="Project 2" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : project === 3 ? (
+                      <img src={project3Image} alt="Project 3" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : project === 4 ? (
+                      <img src={project4Image} alt="Project 4" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : project === 5 ? (
+                      <img src={project5Image} alt="Project 5" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : project === 6 ? (
+                      <img src={project6Image} alt="Project 6" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : (
+                      `Project ${project} Image`
+                    )}
+                  </div>
+                  <div style={{ padding: '20px' }}>
+                    <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>Project {project}</h3>
+                    <p style={{ fontSize: '14px', color: '#888' }}>Project description goes here</p>
+                  </div>
                 </div>
-                <div style={{ padding: '20px' }}>
-                  <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>Project {project}</h3>
-                  <p style={{ fontSize: '14px', color: '#888' }}>Project description goes here</p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
