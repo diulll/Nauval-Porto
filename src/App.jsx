@@ -418,13 +418,12 @@ function AppSections({ activeSection, getAnimationStyle }) {
                   { node: <SiReact style={{ fontSize: '48px', color: '#3498DB' }} />, title: "React", href: "https://react.dev" },
                   { node: <SiLaravel style={{ fontSize: '48px', color: '#FF2D20' }} />, title: "Laravel", href: "https://laravel.com" },
                   { node: <SiPhp style={{ fontSize: '48px', color: '#777BB4' }} />, title: "PHP", href: "https://www.php.net" },
-                  { node: <SiTailwindcss style={{ fontSize: '48px', color: '#06B6D4' }} />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
-                  { node: <div style={{ width: '48px', height: '48px', opacity: 0 }}></div>, title: "Spacer", href: "#" }
+                  { node: <div style={{ display: 'flex', gap: '0px' }}><SiTailwindcss style={{ fontSize: '48px', color: '#06B6D4' }} /><div style={{ width: '48px', height: '48px', opacity: 0 }}></div></div>, title: "Tailwind CSS", href: "https://tailwindcss.com" }
                 ]}
-                speed={120}
+                speed={100}
                 direction="left"
                 logoHeight={48}
-                gap={80}
+                gap={30}
                 hoverSpeed={0}
                 scaleOnHover
                 fadeOut
