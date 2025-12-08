@@ -399,8 +399,28 @@ function AppSections({ activeSection, getAnimationStyle }) {
             <h1 style={{ fontSize: 'clamp(28px, 6vw, 48px)', fontWeight: 'bold', marginBottom: '20px' }}>I'm Nauval</h1>
             <h2 style={{ fontSize: 'clamp(24px, 5vw, 40px)', fontWeight: 'bold', marginBottom: '30px', color: '#888' }}>Web Developer</h2>
             <div style={{ display: 'flex', gap: '15px', marginBottom: '40px', flexWrap: 'wrap' }}>
-              <button style={{ padding: '12px 30px', backgroundColor: '#FF6B6B', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '16px' }}>Got a project?</button>
-              <button style={{ padding: '12px 30px', backgroundColor: 'transparent', color: 'white', border: '1px solid white', borderRadius: '4px', cursor: 'pointer', fontSize: '16px' }}>My resume</button>
+              <button 
+                style={{ padding: '12px 30px', backgroundColor: '#FF6B6B', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '16px', transition: 'all 0.3s ease' }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'scale(0.95)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'scale(1)';
+                }}
+              >
+                Got a project?
+              </button>
+              <button 
+                style={{ padding: '12px 30px', backgroundColor: 'transparent', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '16px', transition: 'all 0.3s ease' }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'scale(0.95)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'scale(1)';
+                }}
+              >
+                My resume
+              </button>
             </div>
             <div style={{ 
               marginTop: '60px',
@@ -434,17 +454,28 @@ function AppSections({ activeSection, getAnimationStyle }) {
           </div>
 
           {/* Right Content - Image placeholder */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', perspective: '1000px' }}>
             <img 
               src={profileImage} 
               alt="Profile" 
               style={{
-                width: 'clamp(200px, 100%, 400px)',
-                height: 'clamp(200px, 100%, 400px)',
-                borderRadius: '50%',
+                width: 'clamp(100px, 100%, 300px)',
+                height: 'clamp(100px, 100%, 300px)',
+                borderRadius: '50% 50% 0 0',
                 objectFit: 'cover',
                 objectPosition: 'center',
-                boxShadow: '0 8px 32px 0 rgba(255, 107, 107, 1)'
+                filter: 'drop-shadow(0 20px 40px rgba(255, 107, 107, 0.8)) drop-shadow(0 0 60px rgba(255, 107, 107, 0.5))',
+                transform: 'rotateY(-15deg) rotateX(5deg) translateZ(50px)',
+                transition: 'all 0.5s ease',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.transform = 'rotateY(0deg) rotateX(0deg) translateZ(80px) scale(1.05)';
+                e.target.style.filter = 'drop-shadow(0 30px 60px rgba(255, 107, 107, 1)) drop-shadow(0 0 100px rgba(255, 107, 107, 0.7))';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = 'rotateY(-15deg) rotateX(5deg) translateZ(50px)';
+                e.target.style.filter = 'drop-shadow(0 20px 40px rgba(255, 107, 107, 0.8)) drop-shadow(0 0 60px rgba(255, 107, 107, 0.5))';
               }}
             />
           </div>
@@ -481,7 +512,7 @@ function AppSections({ activeSection, getAnimationStyle }) {
               <div style={{ marginBottom: '40px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '30px' }}>
                   <span style={{ fontSize: '32px' }}>🏠</span>
-                  <h3 style={{ fontSize: '20px', fontWeight: 'bold' }}>Website Hosting</h3>
+                  <h3 style={{ fontSize: '20px', fontWeight: 'bold' }}>Ui/Ux Design</h3>
                 </div>
               </div>
             </div>
@@ -530,17 +561,29 @@ function AppSections({ activeSection, getAnimationStyle }) {
               const cardInView = useInView(cardRef);
               
               return (
-                <div key={project} ref={cardRef} style={{
-                  backgroundColor: '#1a1a1a',
-                  borderRadius: '8px',
-                  overflow: 'hidden',
-                  cursor: 'pointer',
-                  transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                  minHeight: '300px',
-                  transform: cardInView ? 'translateY(0) scale(1)' : 'translateY(40px) scale(0.95)',
-                  opacity: cardInView ? 1 : 0,
-                  boxShadow: cardInView ? '0 20px 40px rgba(255, 107, 107, 0.2)' : '0 10px 20px rgba(255, 107, 107, 0.1)'
-                }}>
+                <div 
+                  key={project} 
+                  ref={cardRef} 
+                  style={{
+                    backgroundColor: '#1a1a1a',
+                    borderRadius: '8px',
+                    overflow: 'hidden',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                    minHeight: '300px',
+                    transform: cardInView ? 'translateY(0) scale(1)' : 'translateY(40px) scale(0.95)',
+                    opacity: cardInView ? 1 : 0,
+                    boxShadow: cardInView ? '0 20px 40px rgba(255, 107, 107, 0.2)' : '0 10px 20px rgba(255, 107, 107, 0.1)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(0.95)';
+                    e.currentTarget.style.boxShadow = '0 10px 20px rgba(255, 107, 107, 0.4)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.boxShadow = '0 20px 40px rgba(255, 107, 107, 0.2)';
+                  }}
+                >
                   <div style={{
                     width: '100%',
                     height: '200px',
@@ -594,26 +637,36 @@ function AppSections({ activeSection, getAnimationStyle }) {
         <div style={{ maxWidth: '800px', width: '100%', textAlign: 'center', ...fadeInUp(contactInView) }}>
           <h2 style={{ fontSize: 'clamp(32px, 6vw, 48px)', fontWeight: 'bold', marginBottom: '30px' }}>Let's Work Together</h2>
           <p style={{ fontSize: 'clamp(14px, 3vw, 18px)', color: '#aaa', marginBottom: '40px' }}>I'm always interested in hearing about new projects and opportunities.</p>
-          <a href="mailto:badiulfikri24@gmail.com" style={{
-            display: 'inline-block',
-            padding: '15px 40px',
-            backgroundColor: '#FF6B6B',
-            color: 'white',
-            textDecoration: 'none',
-            borderRadius: '4px',
-            fontSize: '16px',
-            cursor: 'pointer'
-          }}>
+          <a 
+            href="mailto:badiulfikri24@gmail.com" 
+            style={{
+              display: 'inline-block',
+              padding: '15px 40px',
+              backgroundColor: '#FF6B6B',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '4px',
+              fontSize: '16px',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.transform = 'scale(0.95)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = 'scale(1)';
+            }}
+          >
             Send me an email
           </a>
           <div style={{ marginTop: '60px', display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
-            <a href="https://wa.me/6281239638514" target="_blank" rel="noopener noreferrer" style={{ transition: 'opacity 0.3s' }} onMouseEnter={(e) => e.target.style.opacity = '0.7'} onMouseLeave={(e) => e.target.style.opacity = '1'}>
+            <a href="https://wa.me/6281239638514" target="_blank" rel="noopener noreferrer" style={{ transition: 'all 0.3s ease', display: 'inline-block' }} onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'} onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}>
               <img src="https://cdn.simpleicons.org/whatsapp/888888" alt="Twitter" width="28" height="28" />
             </a>
-            <a href="https://github.com/diulll" target="_blank" rel="noopener noreferrer" style={{ transition: 'opacity 0.3s' }} onMouseEnter={(e) => e.target.style.opacity = '0.7'} onMouseLeave={(e) => e.target.style.opacity = '1'}>
+            <a href="https://github.com/diulll" target="_blank" rel="noopener noreferrer" style={{ transition: 'all 0.3s ease', display: 'inline-block' }} onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'} onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}>
               <img src="https://cdn.simpleicons.org/github/888888" alt="Github" width="28" height="28" />
             </a>
-            <a href="https://www.instagram.com/diul.f/" target="_blank" rel="noopener noreferrer" style={{ transition: 'opacity 0.3s' }} onMouseEnter={(e) => e.target.style.opacity = '0.7'} onMouseLeave={(e) => e.target.style.opacity = '1'}>
+            <a href="https://www.instagram.com/diul.f/" target="_blank" rel="noopener noreferrer" style={{ transition: 'all 0.3s ease', display: 'inline-block' }} onMouseEnter={(e) => e.target.style.transform = 'scale(1.2)'} onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}>
               <img src="https://cdn.simpleicons.org/instagram/888888" alt="Instagram" width="28" height="28" />
             </a>
           </div>
