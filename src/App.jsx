@@ -240,6 +240,17 @@ function App() {
             transform: translateY(0);
           }
         }
+        
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(-5px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
       `}</style>
 
       {/* Section Welcome dengan Cursor Tracking */}
@@ -376,6 +387,11 @@ function AppSections({ activeSection, getAnimationStyle }) {
   const projectsInView = useInView(projectsRef);
   const contactInView = useInView(contactRef);
 
+  // State untuk popup services
+  const [showWebDevPopup, setShowWebDevPopup] = useState(false);
+  const [showAppDevPopup, setShowAppDevPopup] = useState(false);
+  const [showUiUxPopup, setShowUiUxPopup] = useState(false);
+
   // Count up animations
   const projectsCount = useCountUp(17, 2000, aboutInView);
   const satisfactionCount = useCountUp(95, 2000, aboutInView);
@@ -405,8 +421,10 @@ function AppSections({ activeSection, getAnimationStyle }) {
           <div style={fadeInUp(homeInView)}>
             <p style={{ fontSize: 'clamp(16px, 4vw, 20px)', color: '#888', marginBottom: '10px' }}>Hello .</p>
             <h1 style={{ fontSize: 'clamp(28px, 6vw, 48px)', fontWeight: 'bold', marginBottom: '20px' }}>I'm Nauval</h1>
-            <h2 style={{ fontSize: 'clamp(24px, 5vw, 40px)', fontWeight: 'bold', marginBottom: '30px', color: '#888' }}>Web Developer</h2>
-            <div style={{ display: 'flex', gap: '15px', marginBottom: '40px', flexWrap: 'wrap' }}>
+            <h2 style={{ fontSize: 'clamp(24px, 5vw, 40px)', fontWeight: 'bold', marginBottom: '30px', color: '#888' }}></h2>
+            <div style={{ display: 'flex', gap: '15px', marginBottom: '40px', flexWrap: 'wrap' }}>Web designer and developer from
+Yogyakarta. I create custom websites to
+help businesses do better online.
               <button 
                 style={{ padding: '12px 30px', backgroundColor: '#FF6B6B', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '16px', transition: 'all 0.3s ease' }}
                 onMouseEnter={(e) => {
@@ -505,23 +523,95 @@ function AppSections({ activeSection, getAnimationStyle }) {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '60px', alignItems: 'center' }}>
             {/* Left Services */}
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-              <div style={{ marginBottom: '30px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <div style={{ marginBottom: '30px', position: 'relative' }}>
+                <div 
+                  style={{ display: 'flex', alignItems: 'center', gap: '15px', cursor: 'pointer' }}
+                  onMouseEnter={() => setShowWebDevPopup(true)}
+                  onMouseLeave={() => setShowWebDevPopup(false)}
+                >
                   <FaLaptopCode style={{ fontSize: '48px', color: '#FF6B6B' }} />
                   <h3 style={{ fontSize: '20px', fontWeight: 'bold' }}>Website Development</h3>
                 </div>
+                {showWebDevPopup && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '70px',
+                    left: '0',
+                    backgroundColor: 'rgba(20, 20, 30, 0.4)',
+                    backdropFilter: 'blur(20px)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    borderRadius: '12px',
+                    padding: '15px 20px',
+                    maxWidth: '350px',
+                    zIndex: 100,
+                    boxShadow: '0 8px 32px 0 rgba(255, 107, 107, 0.3)',
+                    animation: 'fadeIn 0.3s ease-in'
+                  }}>
+                    <p style={{ fontSize: '16px', lineHeight: '1.6', color: '#FF6B6B', margin: 0 }}>
+                      Building a solid website for your business. We create responsive, fast, and secure websites, ensuring your business is always accessible from anywhere, anytime
+                    </p>
+                  </div>
+                )}
               </div>
-              <div style={{ marginBottom: '30px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <div style={{ marginBottom: '30px', position: 'relative' }}>
+                <div 
+                  style={{ display: 'flex', alignItems: 'center', gap: '15px', cursor: 'pointer' }}
+                  onMouseEnter={() => setShowAppDevPopup(true)}
+                  onMouseLeave={() => setShowAppDevPopup(false)}
+                >
                   <FaMobileAlt style={{ fontSize: '48px', color: '#FF6B6B' }} />
                   <h3 style={{ fontSize: '20px', fontWeight: 'bold' }}>App Development</h3>
                 </div>
+                {showAppDevPopup && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '70px',
+                    left: '0',
+                    backgroundColor: 'rgba(20, 20, 30, 0.4)',
+                    backdropFilter: 'blur(20px)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    borderRadius: '12px',
+                    padding: '15px 20px',
+                    maxWidth: '350px',
+                    zIndex: 100,
+                    boxShadow: '0 8px 32px 0 rgba(255, 107, 107, 0.3)',
+                    animation: 'fadeIn 0.3s ease-in'
+                  }}>
+                    <p style={{ fontSize: '16px', lineHeight: '1.6', color: '#FF6B6B', margin: 0 }}>
+                      Turning innovative ideas into powerful mobile apps. We develop stable and intuitive iOS and Android apps, helping you connect with customers right at their fingertips
+                    </p>
+                  </div>
+                )}
               </div>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <div style={{ position: 'relative' }}>
+                <div 
+                  style={{ display: 'flex', alignItems: 'center', gap: '15px', cursor: 'pointer' }}
+                  onMouseEnter={() => setShowUiUxPopup(true)}
+                  onMouseLeave={() => setShowUiUxPopup(false)}
+                >
                   <FaFigma style={{ fontSize: '48px', color: '#FF6B6B' }} />
                   <h3 style={{ fontSize: '20px', fontWeight: 'bold' }}>Ui/Ux Design</h3>
                 </div>
+                {showUiUxPopup && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '70px',
+                    left: '0',
+                    backgroundColor: 'rgba(20, 20, 30, 0.4)',
+                    backdropFilter: 'blur(20px)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    borderRadius: '12px',
+                    padding: '15px 20px',
+                    maxWidth: '350px',
+                    zIndex: 100,
+                    boxShadow: '0 8px 32px 0 rgba(255, 107, 107, 0.3)',
+                    animation: 'fadeIn 0.3s ease-in'
+                  }}>
+                    <p style={{ fontSize: '16px', lineHeight: '1.6', color: '#FF6B6B', margin: 0 }}>
+                      More than just aesthetics, we design experiences. Through in-depth research and user-friendly interface design, we ensure users feel at home and can easily interact with your digital products.
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
 
