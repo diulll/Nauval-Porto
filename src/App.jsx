@@ -3,6 +3,7 @@ import BlurText from "./BlurText"
 import GooeyNav from './components/GooeyNav'
 import LogoLoop from './components/LogoLoop'
 import { SiReact, SiTailwindcss, SiHtml5, SiCss3, SiJavascript, SiLaravel, SiPhp } from 'react-icons/si'
+import { FaLaptopCode, FaMobileAlt, FaFigma } from 'react-icons/fa'
 import './App.css'
 const Halaman1 = '/Halaman1.png'
 import profileImage from './assets/profileweb.png'
@@ -129,56 +130,63 @@ function App() {
     <>
       {/* Navbar dengan GooeyNav */}
       {showNavbar && (
-        <nav style={{
+        <div style={{
           position: 'fixed',
           top: '20px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          backgroundColor: 'rgba(20, 20, 30, 0.4)',
-          backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-          borderRadius: '50px',
-          padding: '4px 18px',
+          left: '0',
+          right: '0',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           zIndex: '1000',
-          height: 'auto',
-          flexWrap: 'wrap',
-          boxShadow: '0 8px 32px 0 rgba(255, 107, 107, 0.3)',
-          animation: 'slideDown 0.3s ease-out'
+          pointerEvents: 'none'
         }}>
-        
-        {/* Desktop GooeyNav */}
-        <div style={{ display: window.innerWidth > 768 ? 'flex' : 'none', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
-          <GooeyNav
-            items={navItems}
-            particleCount={10}
-            particleDistances={[55, 6]}
-            particleR={65}
-            initialActiveIndex={activeSection - 1}
-            animationTime={600}
-            timeVariance={300}
-            colors={[1, 2, 3, 1, 2, 3, 1, 4]}
-          />
-        </div>
+          <nav style={{
+            backgroundColor: 'rgba(20, 20, 30, 0.4)',
+            backdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            borderRadius: '50px',
+            padding: '4px 18px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: 'auto',
+            boxShadow: '0 8px 32px 0 rgba(255, 107, 107, 0.3)',
+            animation: 'slideDown 0.3s ease-out',
+            pointerEvents: 'auto'
+          }}>
+          
+          {/* Desktop GooeyNav */}
+          <div style={{ display: window.innerWidth > 768 ? 'flex' : 'none', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+            <GooeyNav
+              items={navItems}
+              particleCount={10}
+              particleDistances={[55, 6]}
+              particleR={65}
+              initialActiveIndex={activeSection - 1}
+              animationTime={600}
+              timeVariance={300}
+              colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+            />
+          </div>
 
-        {/* Mobile Menu Button */}
-        <button 
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          style={{
-            display: window.innerWidth <= 768 ? 'block' : 'none',
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            color: 'white',
-            fontSize: '14px',
-            zIndex: 1001
-          }}
-        >
-          ☰
-        </button>
-        </nav>
+          {/* Mobile Menu Button */}
+          <button 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            style={{
+              display: window.innerWidth <= 768 ? 'block' : 'none',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              color: 'white',
+              fontSize: '14px',
+              zIndex: 1001
+            }}
+          >
+            ☰
+          </button>
+          </nav>
+        </div>
       )}
 
       {/* Mobile Menu */}
@@ -369,7 +377,7 @@ function AppSections({ activeSection, getAnimationStyle }) {
   const contactInView = useInView(contactRef);
 
   // Count up animations
-  const projectsCount = useCountUp(120, 2000, aboutInView);
+  const projectsCount = useCountUp(17, 2000, aboutInView);
   const satisfactionCount = useCountUp(95, 2000, aboutInView);
   const yearsCount = useCountUp(1, 2000, aboutInView);
 
@@ -494,24 +502,24 @@ function AppSections({ activeSection, getAnimationStyle }) {
         ...getAnimationStyle(2)
       }}>
         <div style={{ maxWidth: '1200px', width: '100%', ...fadeInUp(aboutInView) }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '60px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '60px', alignItems: 'center' }}>
             {/* Left Services */}
-            <div>
-              <div style={{ marginBottom: '40px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '30px' }}>
-                  <span style={{ fontSize: '32px' }}>💻</span>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div style={{ marginBottom: '30px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                  <FaLaptopCode style={{ fontSize: '48px', color: '#FF6B6B' }} />
                   <h3 style={{ fontSize: '20px', fontWeight: 'bold' }}>Website Development</h3>
                 </div>
               </div>
-              <div style={{ marginBottom: '40px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '30px' }}>
-                  <span style={{ fontSize: '32px' }}>📱</span>
+              <div style={{ marginBottom: '30px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                  <FaMobileAlt style={{ fontSize: '48px', color: '#FF6B6B' }} />
                   <h3 style={{ fontSize: '20px', fontWeight: 'bold' }}>App Development</h3>
                 </div>
               </div>
-              <div style={{ marginBottom: '40px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '30px' }}>
-                  <span style={{ fontSize: '32px' }}>🏠</span>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                  <FaFigma style={{ fontSize: '48px', color: '#FF6B6B' }} />
                   <h3 style={{ fontSize: '20px', fontWeight: 'bold' }}>Ui/Ux Design</h3>
                 </div>
               </div>
