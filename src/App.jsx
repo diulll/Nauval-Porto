@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import BlurText from "./BlurText"
 import GooeyNav from './components/GooeyNav'
 import LogoLoop from './components/LogoLoop'
-import { SiReact, SiTailwindcss, SiHtml5, SiCss3, SiJavascript, SiLaravel, SiPhp } from 'react-icons/si'
-import { FaLaptopCode, FaMobileAlt, FaFigma } from 'react-icons/fa'
+import { SiReact, SiTailwindcss, SiHtml5, SiCss3, SiJavascript, SiLaravel, SiPhp, SiGithub } from 'react-icons/si'
+import { FaLaptopCode, FaMobileAlt, FaFigma, FaImage } from 'react-icons/fa'
 import './App.css'
 const Halaman1 = '/Halaman1.png'
 import profileImage from './assets/profileweb.png'
@@ -391,11 +391,12 @@ function AppSections({ activeSection, getAnimationStyle }) {
   const [showWebDevPopup, setShowWebDevPopup] = useState(false);
   const [showAppDevPopup, setShowAppDevPopup] = useState(false);
   const [showUiUxPopup, setShowUiUxPopup] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   // Count up animations
   const projectsCount = useCountUp(17, 2000, aboutInView);
   const satisfactionCount = useCountUp(95, 2000, aboutInView);
-  const yearsCount = useCountUp(1, 2000, aboutInView);
+  const yearsCount = useCountUp(2, 2000, aboutInView);
 
   const fadeInUp = (isInView) => ({
     opacity: isInView ? 1 : 0,
@@ -427,6 +428,12 @@ Yogyakarta. I create custom websites to
 help businesses do better online.
               <button 
                 style={{ padding: '12px 30px', backgroundColor: '#FF6B6B', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '16px', transition: 'all 0.3s ease' }}
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
                 onMouseEnter={(e) => {
                   e.target.style.transform = 'scale(0.95)';
                 }}
@@ -434,7 +441,7 @@ help businesses do better online.
                   e.target.style.transform = 'scale(1)';
                 }}
               >
-                Got a project?
+                Contact Me
               </button>
               <button 
                 style={{ padding: '12px 30px', backgroundColor: 'transparent', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '16px', transition: 'all 0.3s ease' }}
@@ -448,8 +455,9 @@ help businesses do better online.
                 My resume
               </button>
             </div>
+            <p style={{ fontSize: 'clamp(16px, 4vw, 20px)', color: '#888', marginBottom: '5px' }}>My Tools</p>
             <div style={{ 
-              marginTop: '60px',
+              marginTop: '10px',
               overflow: 'hidden',
               paddingRight: '20px',
               display: 'flex',
@@ -590,7 +598,7 @@ help businesses do better online.
                   onMouseLeave={() => setShowUiUxPopup(false)}
                 >
                   <FaFigma style={{ fontSize: '48px', color: '#FF6B6B' }} />
-                  <h3 style={{ fontSize: '20px', fontWeight: 'bold' }}>Ui/Ux Design</h3>
+                  <h3 style={{ fontSize: '20px', fontWeight: 'bold' }}>UI / UX Designer</h3>
                 </div>
                 {showUiUxPopup && (
                   <div style={{
@@ -653,15 +661,71 @@ help businesses do better online.
       }}>
         <div style={{ maxWidth: '1200px', width: '100%', ...fadeInUp(projectsInView) }}>
           <h2 style={{ fontSize: 'clamp(32px, 6vw, 48px)', fontWeight: 'bold', marginBottom: '60px', textAlign: 'center' }}>Projects</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}>
-            {[1, 2, 3, 4, 5, 6].map((project) => {
-              const cardRef = useRef(null);
-              const cardInView = useInView(cardRef);
+          
+          {/* Data Projects - Edit di sini untuk mengubah informasi project */}
+          {(() => {
+            const projectsData = [
+              {
+                id: 1,
+                title: 'Old Calculator',
+                description: 'A simple calculator web application',
+                image: project1Image,
+                githubLink: 'https://github.com/diulll/Old-calculator',
+                websiteLink: 'https://old-calculator.vercel.app/'
+              },
+              {
+                id: 2,
+                title: 'Project 2',
+                description: 'Project description goes here',
+                image: project2Image,
+                githubLink: 'https://github.com/diulll',
+                websiteLink: null
+              },
+              {
+                id: 3,
+                title: 'Project 3',
+                description: 'Project description goes here',
+                image: project3Image,
+                githubLink: 'https://github.com/diulll',
+                websiteLink: null
+              },
+              {
+                id: 4,
+                title: 'Project 4',
+                description: 'Project description goes here',
+                image: project4Image,
+                githubLink: 'https://github.com/diulll',
+                websiteLink: null
+              },
+              {
+                id: 5,
+                title: 'Project 5',
+                description: 'Project description goes here',
+                image: project5Image,
+                githubLink: 'https://github.com/diulll',
+                websiteLink: null
+              },
+              {
+                id: 6,
+                title: 'Project 6',
+                description: 'Project description goes here',
+                image: project6Image,
+                githubLink: 'https://github.com/diulll',
+                websiteLink: null
+              }
+            ];
+
+            return (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}>
+                {projectsData.map((projectData) => {
+                  const cardRef = useRef(null);
+                  const cardInView = useInView(cardRef);
+                  const [isHovered, setIsHovered] = useState(false);
               
-              return (
-                <div 
-                  key={project} 
-                  ref={cardRef} 
+                  return (
+                    <div 
+                      key={projectData.id} 
+                      ref={cardRef} 
                   style={{
                     backgroundColor: '#1a1a1a',
                     borderRadius: '8px',
@@ -676,10 +740,12 @@ help businesses do better online.
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'scale(0.95)';
                     e.currentTarget.style.boxShadow = '0 10px 20px rgba(255, 107, 107, 0.4)';
+                    setIsHovered(true);
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'scale(1)';
                     e.currentTarget.style.boxShadow = '0 20px 40px rgba(255, 107, 107, 0.2)';
+                    setIsHovered(false);
                   }}
                 >
                   <div style={{
@@ -692,32 +758,111 @@ help businesses do better online.
                     color: '#666',
                     fontSize: '14px',
                     transition: 'all 0.6s ease',
-                    overflow: 'hidden'
+                    overflow: 'hidden',
+                    position: 'relative'
                   }}>
-                    {project === 1 ? (
-                      <img src={project1Image} alt="Project 1" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    ) : project === 2 ? (
-                      <img src={project2Image} alt="Project 2" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    ) : project === 3 ? (
-                      <img src={project3Image} alt="Project 3" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    ) : project === 4 ? (
-                      <img src={project4Image} alt="Project 4" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    ) : project === 5 ? (
-                      <img src={project5Image} alt="Project 5" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    ) : project === 6 ? (
-                      <img src={project6Image} alt="Project 6" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    ) : (
-                      `Project ${project} Image`
-                    )}
+                    <img 
+                      src={projectData.image} 
+                      alt={projectData.title} 
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover',
+                        transition: 'all 0.3s ease',
+                        filter: isHovered ? 'brightness(0.4)' : 'brightness(1)'
+                      }} 
+                    />
+                    
+                    {/* Overlay dengan icons */}
+                    <div style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '30px',
+                      opacity: isHovered ? 1 : 0,
+                      transition: 'opacity 0.3s ease',
+                      pointerEvents: isHovered ? 'auto' : 'none'
+                    }}>
+                      <a
+                        href={projectData.githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          width: '50px',
+                          height: '50px',
+                          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                          backdropFilter: 'blur(10px)',
+                          borderRadius: '50%',
+                          border: '2px solid rgba(255, 255, 255, 0.2)',
+                          transition: 'all 0.3s ease',
+                          cursor: 'pointer'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(255, 107, 107, 0.8)';
+                          e.currentTarget.style.transform = 'scale(1.1)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                          e.currentTarget.style.transform = 'scale(1)';
+                        }}
+                      >
+                        <SiGithub style={{ fontSize: '24px', color: 'white' }} />
+                      </a>
+                      
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (projectData.websiteLink) {
+                            window.open(projectData.websiteLink, '_blank');
+                          } else {
+                            setSelectedImage(projectData.image);
+                          }
+                        }}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          width: '50px',
+                          height: '50px',
+                          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                          backdropFilter: 'blur(10px)',
+                          borderRadius: '50%',
+                          border: '2px solid rgba(255, 255, 255, 0.2)',
+                          transition: 'all 0.3s ease',
+                          cursor: 'pointer'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(255, 107, 107, 0.8)';
+                          e.currentTarget.style.transform = 'scale(1.1)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                          e.currentTarget.style.transform = 'scale(1)';
+                        }}
+                      >
+                        <FaImage style={{ fontSize: '24px', color: 'white' }} />
+                      </button>
+                    </div>
                   </div>
                   <div style={{ padding: '20px' }}>
-                    <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>Project {project}</h3>
-                    <p style={{ fontSize: '14px', color: '#888' }}>Project description goes here</p>
+                    <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>{projectData.title}</h3>
+                    <p style={{ fontSize: '14px', color: '#888' }}>{projectData.description}</p>
                   </div>
                 </div>
               );
             })}
           </div>
+          );
+          })()}
         </div>
       </section>
 
@@ -770,6 +915,76 @@ help businesses do better online.
           </div>
         </div>
       </section>
+
+      {/* Modal untuk menampilkan gambar full size */}
+      {selectedImage && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 9999,
+            padding: '20px',
+            cursor: 'pointer',
+            animation: 'fadeIn 0.3s ease'
+          }}
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            onClick={() => setSelectedImage(null)}
+            style={{
+              position: 'absolute',
+              top: '20px',
+              right: '20px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '50px',
+              height: '50px',
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: '50%',
+              border: '2px solid rgba(255, 255, 255, 0.2)',
+              color: 'white',
+              fontSize: '24px',
+              fontWeight: '400',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              zIndex: 10000,
+              padding: '0',
+              lineHeight: '0'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgba(255, 107, 107, 0.8)';
+              e.currentTarget.style.transform = 'scale(1.1)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
+          >
+            <span style={{ marginTop: '-2px' }}>×</span>
+          </button>
+          <img
+            src={selectedImage}
+            alt="Project Full View"
+            style={{
+              maxWidth: '90%',
+              maxHeight: '90%',
+              objectFit: 'contain',
+              borderRadius: '8px',
+              boxShadow: '0 20px 60px rgba(255, 107, 107, 0.3)'
+            }}
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </>
   )
 }
