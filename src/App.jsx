@@ -627,7 +627,7 @@ help businesses do better online.
             <div>
               <h2 style={{ fontSize: 'clamp(32px, 6vw, 48px)', fontWeight: 'bold', marginBottom: '30px' }}>About me</h2>
               <p style={{ fontSize: 'clamp(14px, 3vw, 16px)', lineHeight: '1.8', color: '#aaa', marginBottom: '40px' }}>
-                I started my software journey from photography. Through that, I learned to love the process of creating from scratch. Since then, this has led me to software development as it fulfills my love for learning and building things.
+               I’m a beginner Front-End Developer who loves coding cool-looking and responsive websites. I enjoy experimenting with layouts, colors, and interactions to make each project feel unique. I’m still learning and exploring new tools and technologies, and every step I take helps me grow as a developer. I’m excited to keep improving my skills, build more meaningful projects, and become better with every challenge.
               </p>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '30px' }}>
                 <div>
@@ -675,42 +675,42 @@ help businesses do better online.
               },
               {
                 id: 2,
-                title: 'Project 2',
-                description: 'Project description goes here',
+                title: 'Aggregate Functions Dashboard',
+                description: 'Displays key item calculations such as max, min, average, and total values in a clean, card-based layout.',
                 image: project2Image,
-                githubLink: 'https://github.com/diulll',
+                githubLink: 'https://github.com/diulll/sistem-manajemen-barang-',
                 websiteLink: null
               },
               {
                 id: 3,
-                title: 'Project 3',
-                description: 'Project description goes here',
+                title: 'Aquarium Refill Illustration',
+                description: 'A clean, minimal fishbowl graphic with a refill button',
                 image: project3Image,
                 githubLink: 'https://github.com/diulll',
-                websiteLink: null
+                websiteLink: 'http://aquarium-refill.vercel.app/'
               },
               {
                 id: 4,
-                title: 'Project 4',
-                description: 'Project description goes here',
+                title: 'Culinary Banner',
+                description: 'A vibrant hero banner featuring traditional Pentol.',
                 image: project4Image,
                 githubLink: 'https://github.com/diulll',
                 websiteLink: null
               },
               {
                 id: 5,
-                title: 'Project 5',
-                description: 'Project description goes here',
+                title: 'Personal Portfolio',
+                description: 'Quick intro with my photo and tools',
                 image: project5Image,
-                githubLink: 'https://github.com/diulll',
+                githubLink: 'https://github.com/diulll/Nauval-Porto',
                 websiteLink: null
               },
               {
                 id: 6,
-                title: 'Project 6',
-                description: 'Project description goes here',
+                title: 'Notes App UI',
+                description: 'A clean note-taking interface with basic controls',
                 image: project6Image,
-                githubLink: 'https://github.com/diulll',
+                githubLink: 'https://github.com/diulll/notes',
                 websiteLink: null
               }
             ];
@@ -878,8 +878,8 @@ help businesses do better online.
         ...getAnimationStyle(4)
       }}>
         <div style={{ maxWidth: '800px', width: '100%', textAlign: 'center', ...fadeInUp(contactInView) }}>
-          <h2 style={{ fontSize: 'clamp(32px, 6vw, 48px)', fontWeight: 'bold', marginBottom: '30px' }}>Let's Work Together</h2>
-          <p style={{ fontSize: 'clamp(14px, 3vw, 18px)', color: '#aaa', marginBottom: '40px' }}>I'm always interested in hearing about new projects and opportunities.</p>
+          <h2 style={{ fontSize: 'clamp(32px, 6vw, 48px)', fontWeight: 'bold', marginBottom: '30px' }}>I’m ready for new projects.</h2>
+          <p style={{ fontSize: 'clamp(14px, 3vw, 18px)', color: '#aaa', marginBottom: '40px' }}>Don’t worry about reaching out if you’d like to discuss ideas or potential collaboration opportunities.</p>
           <a 
             href="mailto:badiulfikri24@gmail.com" 
             style={{
