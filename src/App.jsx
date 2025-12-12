@@ -423,9 +423,7 @@ function AppSections({ activeSection, getAnimationStyle }) {
             <p style={{ fontSize: 'clamp(16px, 4vw, 20px)', color: '#888', marginBottom: '10px' }}>Hello .</p>
             <h1 style={{ fontSize: 'clamp(28px, 6vw, 48px)', fontWeight: 'bold', marginBottom: '20px' }}>I'm Nauval</h1>
             <h2 style={{ fontSize: 'clamp(24px, 5vw, 40px)', fontWeight: 'bold', marginBottom: '30px', color: '#888' }}></h2>
-            <div style={{ display: 'flex', gap: '15px', marginBottom: '40px', flexWrap: 'wrap' }}>Web designer and developer from
-Yogyakarta. I create custom websites to
-help businesses do better online.
+            <div style={{ display: 'flex', gap: '15px', marginBottom: '40px', flexWrap: 'wrap' }}>Web designer and developer from Yogyakarta. I create custom websites to help businesses do better online.
               <button 
                 style={{ padding: '12px 30px', backgroundColor: '#FF6B6B', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '16px', transition: 'all 0.3s ease' }}
                 onClick={() => {
@@ -450,6 +448,12 @@ help businesses do better online.
                 }}
                 onMouseLeave={(e) => {
                   e.target.style.transform = 'scale(1)';
+                }}
+                onClick={() => {
+                   const link = document.createElement("a");
+                   link.href = "/cv.pdf";     // pastikan file ada di public/cv.pdf
+                   link.download = "cv.pdf";  // nama file ketika didownload
+                   link.click();
                 }}
               >
                 My resume
