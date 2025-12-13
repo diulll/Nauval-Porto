@@ -679,10 +679,10 @@ function AppSections({ activeSection, getAnimationStyle }) {
               },
               {
                 id: 2,
-                title: 'Aggregate Functions Dashboard',
-                description: 'Displays key item calculations such as max, min, average, and total values in a clean, card-based layout.',
+                title: 'Academic Management Dashboard',
+                description: 'A dashboard interface for managing student data and grades, featuring summary cards and recent activity tables.',
                 image: project2Image,
-                githubLink: 'https://github.com/diulll/sistem-manajemen-barang-',
+                githubLink: 'https://github.com/diulll/Sistem-Akademik-Mahasiswa',
                 websiteLink: null
               },
               {
