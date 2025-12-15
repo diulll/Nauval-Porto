@@ -394,7 +394,7 @@ function AppSections({ activeSection, getAnimationStyle }) {
   const [selectedImage, setSelectedImage] = useState(null);
 
   // Count up animations
-  const projectsCount = useCountUp(17, 2000, aboutInView);
+  const projectsCount = useCountUp(4, 2000, aboutInView);
   const satisfactionCount = useCountUp(95, 2000, aboutInView);
   const yearsCount = useCountUp(2, 2000, aboutInView);
 
