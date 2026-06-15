@@ -114,7 +114,7 @@ export const PROJECTS = [
     title: 'Personal Portfolio Website',
     description: 'A sleek developer portfolio showcasing a modern landing page, tech skills, and custom web design work.',
     image: project6Image,
-    githubLink: 'https://github.com/diulll/nauval Porto',
+    githubLink: 'https://github.com/diulll/Nauval-Porto',
     websiteLink: null,
   },
 ]
