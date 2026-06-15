@@ -115,7 +115,7 @@ export const PROJECTS = [
     description: 'A sleek developer portfolio showcasing a modern landing page, tech skills, and custom web design work.',
     image: project6Image,
     githubLink: 'https://github.com/diulll/Nauval-Porto',
-    websiteLink: null,
+    websiteLink: 'https://nauval-porto.vercel.app/',
   },
 ]
 
