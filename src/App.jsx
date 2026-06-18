@@ -94,7 +94,7 @@ function App() {
 
   const handleDownloadResume = async () => {
     try {
-      const response = await fetch('/cv.pdf')
+      const response = await fetch('/cv_Nauval.pdf')
       if (!response.ok) throw new Error('Download failed')
       const blob = await response.blob()
       const url = window.URL.createObjectURL(blob)
@@ -107,7 +107,7 @@ function App() {
       window.URL.revokeObjectURL(url)
     } catch {
       const link = document.createElement('a')
-      link.href = '/cv.pdf'
+      link.href = '/cv_Nauval.pdf'
       link.download = 'Nauval_Resume.pdf'
       document.body.appendChild(link)
       link.click()
